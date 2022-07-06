@@ -10963,3 +10963,22 @@ a.text-dark:focus {
   margin: 5px;
 }
 
+.ms_card-container .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.post-show h1 {
+  font-size: 3rem;
+  font-weight: bolder;
+}
+
+.post-show h4 {
+  border-bottom: 1px solid grey;
+}
+
+.post-show p {
+  font-size: 1.82rem;
+}
+

@@ -14,5 +14,27 @@
   .card{
     width: 18rem;
     margin: 5px;
+
+    &-body{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}
+
+.post-show{
+
+  h1{
+    font-size: 3rem;
+    font-weight: bolder;
+  }
+
+  h4{
+    border-bottom: 1px solid grey;
+  }
+
+  p{
+    font-size: 1.82rem;
   }
 }
