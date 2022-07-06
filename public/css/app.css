@@ -10953,3 +10953,13 @@ a.text-dark:focus {
   }
 }
 
+.ms_card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ms_card-container .card {
+  width: 18rem;
+  margin: 5px;
+}
+
