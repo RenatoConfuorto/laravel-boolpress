@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
@@ -61,7 +62,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -73,7 +75,17 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate($this->getPostValidationRules());
+        $data = $request->all();
+
+        $post = Post::findOrFail($id);
+        $post->title = $data['title'];
+        $post->content = $data['content'];
+        $post->slug = $this->generatePostSlug($post->title);
+
+        $post->save();
+
+        return redirect()->route('admin.posts.show', ['post' => $id]);
     }
 
     /**
@@ -85,5 +97,28 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getPostValidationRules(){
+        return [
+            'title' => 'required|max:255',
+            'content' => 'required|max:30000'
+        ];
+    }
+
+    public function generatePostSlug($title){
+
+        $base_slug = Str::slug($title, '-');
+        $slug = $base_slug;
+        $relative_post = Post::where('slug', '=', $slug)->first();
+        $count = 1;
+
+        while($relative_post){
+            $slug = $base_slug . '-' . $count;
+            $relative_post = Post::where('slug', '=', $slug);
+            $count++;
+        }
+
+        return $slug;
     }
 }
