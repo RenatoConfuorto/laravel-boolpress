@@ -1,6 +1,8 @@
 @extends('dashboard')
 
 @section('content')
+
+    <a href="{{ route('admin.posts.create') }}" class="btn btn-primary">Nuovo</a>
     <div class="ms_card-container">
 
         @foreach ($post_list as $post)

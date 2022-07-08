@@ -28,7 +28,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -39,7 +39,16 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->getPostValidationRules());
+        $post = new Post();
+        $data = $request->all();
+        $post->title = $data['title'];
+        $post->content = $data['content'];
+        $post->slug = Post::generatePostSlug($post->title);
+
+        $post->save();
+        
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -81,7 +90,7 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $post->title = $data['title'];
         $post->content = $data['content'];
-        $post->slug = $this->generatePostSlug($post->title);
+        $post->slug = Post::generatePostSlug($post->title);
 
         $post->save();
 
@@ -99,27 +108,12 @@ class PostsController extends Controller
         //
     }
 
-    public function getPostValidationRules(){
+    private function getPostValidationRules(){
         return [
             'title' => 'required|max:255',
             'content' => 'required|max:30000'
         ];
     }
 
-    public function generatePostSlug($title){
-
-        $base_slug = Str::slug($title, '-');
-        $slug = $base_slug;
-        $relative_post = Post::where('slug', '=', $slug)->first();
-        $count = 1;
-
-        while($relative_post){
-            $slug = $base_slug . '-' . $count;
-            $relative_post = Post::where('slug', '=', $slug)->first();
-            $count++;
-        }
-
-        return $slug;
-
-    }
+    
 }
