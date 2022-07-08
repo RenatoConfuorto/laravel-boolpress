@@ -47,7 +47,7 @@ class PostsController extends Controller
         $post->slug = Post::generatePostSlug($post->title);
 
         $post->save();
-        
+
         return redirect()->route('admin.posts.index');
     }
 
@@ -105,7 +105,11 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 
     private function getPostValidationRules(){
