@@ -115,10 +115,11 @@ class PostsController extends Controller
 
         while($relative_post){
             $slug = $base_slug . '-' . $count;
-            $relative_post = Post::where('slug', '=', $slug);
+            $relative_post = Post::where('slug', '=', $slug)->first();
             $count++;
         }
 
         return $slug;
+
     }
 }
