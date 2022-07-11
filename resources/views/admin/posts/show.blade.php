@@ -6,6 +6,8 @@
   <h4>{{ $post->slug }}</h4>
   <p>{{ $post->content }}</p>
 
+  <p>Categoria: {{ $post->category ? $post->category->name : 'Nessuna' }}</p>
+
   <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class="btn btn-primary">Modifica</a>
   <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}" method="POST">
     @csrf
