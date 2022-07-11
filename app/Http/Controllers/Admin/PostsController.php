@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -29,8 +30,9 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
         // dd($category);
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -48,10 +50,14 @@ class PostsController extends Controller
         // $post->title = $data['title'];
         // $post->content = $data['content'];
         $data['slug'] = Post::generatePostSlug($data['title']);
-
+        // dd($data);
         $post->fill($data);
+        
         $post->save();
 
+        if(isset($data['tags'])){
+            $post->tags()->sync($data['tags']);
+        }
         return redirect()->route('admin.posts.index');
     }
 
@@ -79,7 +85,8 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -101,6 +108,10 @@ class PostsController extends Controller
 
         $post->update($data);
         $post->save();
+
+        if(isset($data['tags'])){
+            $post->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', ['post' => $id]);
     }
@@ -125,6 +136,7 @@ class PostsController extends Controller
             'title' => 'required|max:255',
             'content' => 'required|max:30000',
             'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ];
     }
 
