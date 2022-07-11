@@ -6,8 +6,6 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
@@ -66,7 +64,9 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        return view('admin.posts.show', compact('post'));
+        $tags = $post->tags;
+        // dd(($tags->isEmpty()));
+        return view('admin.posts.show', compact('post', 'tags'));
     }
 
     /**

@@ -10986,3 +10986,7 @@ a.text-dark:focus {
   width: 60%;
 }
 
+.tag-list {
+  list-style: none;
+}
+
