@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -42,10 +43,12 @@ class PostsController extends Controller
         $request->validate($this->getPostValidationRules());
         $post = new Post();
         $data = $request->all();
-        $post->title = $data['title'];
-        $post->content = $data['content'];
-        $post->slug = Post::generatePostSlug($post->title);
 
+        // $post->title = $data['title'];
+        // $post->content = $data['content'];
+        $data['slug'] = Post::generatePostSlug($data['title']);
+
+        $post->fill($data);
         $post->save();
 
         return redirect()->route('admin.posts.index');
@@ -88,10 +91,11 @@ class PostsController extends Controller
         $data = $request->all();
 
         $post = Post::findOrFail($id);
-        $post->title = $data['title'];
-        $post->content = $data['content'];
-        $post->slug = Post::generatePostSlug($post->title);
+        // $post->title = $data['title'];
+        // $post->content = $data['content'];
+        $data['slug'] = Post::generatePostSlug($data['title']);
 
+        $post->update($data);
         $post->save();
 
         return redirect()->route('admin.posts.show', ['post' => $id]);
