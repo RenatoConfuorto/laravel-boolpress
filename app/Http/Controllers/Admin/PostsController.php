@@ -125,6 +125,7 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+        $post->tags()->sync([]);
 
         $post->delete();
 
