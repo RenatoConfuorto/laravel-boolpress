@@ -1,15 +1,16 @@
 <template>
   <div>
-    <WorkInProgress />
+    <PostList/>
   </div>
 </template>
 
 <script>
-import WorkInProgress from '../components/WorknProgress.vue'
+import PostList from '../components/PostList.vue';
+
 export default {
   name: 'App',
   components: {
-    WorkInProgress,
+    PostList,
   },
 }
 </script>
