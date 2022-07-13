@@ -1926,7 +1926,7 @@ __webpack_require__.r(__webpack_exports__);
           page: currentPage
         }
       }).then(function (resp) {
-        console.log(resp);
+        // console.log(resp);
         _this.posts = resp.data.response.data;
         _this.currentPage = currentPage;
         _this.totalPages = resp.data.response.last_page;
@@ -1999,52 +1999,60 @@ var render = function render() {
     }, [_vm._v(_vm._s(post.title))]), _vm._v(" "), _c("p", {
       staticClass: "card-text"
     }, [_vm._v("\r\n              " + _vm._s(_vm.getCardText(post.content, 50)) + "\r\n            ")])])])]);
-  }), 0), _vm._v(" "), _vm._m(0)]);
+  }), 0), _vm._v(" "), _c("ul", {
+    staticClass: "pagination mb-5"
+  }, [_c("li", {
+    staticClass: "page-item",
+    "class": {
+      disabled: _vm.currentPage === 1
+    }
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.getPosts(_vm.currentPage - 1);
+      }
+    }
+  }, [_vm._v("Previous")])]), _vm._v(" "), _vm._l(_vm.totalPages, function (n) {
+    return _c("li", {
+      key: n,
+      staticClass: "page-item",
+      "class": {
+        active: _vm.currentPage === n
+      }
+    }, [_c("a", {
+      staticClass: "page-link",
+      attrs: {
+        href: "#"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.getPosts(n);
+        }
+      }
+    }, [_vm._v(_vm._s(n))])]);
+  }), _vm._v(" "), _c("li", {
+    staticClass: "page-item",
+    "class": {
+      disabled: _vm.currentPage === _vm.totalPages
+    }
+  }, [_c("a", {
+    staticClass: "page-link",
+    attrs: {
+      href: "#"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.getPosts(_vm.currentPage + 1);
+      }
+    }
+  }, [_vm._v("Next")])])], 2)]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("ul", {
-    staticClass: "pagination mt-5"
-  }, [_c("li", {
-    staticClass: "page-item"
-  }, [_c("a", {
-    staticClass: "page-link",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Previous")])]), _vm._v(" "), _c("li", {
-    staticClass: "page-item"
-  }, [_c("a", {
-    staticClass: "page-link",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("1")])]), _vm._v(" "), _c("li", {
-    staticClass: "page-item"
-  }, [_c("a", {
-    staticClass: "page-link",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("2")])]), _vm._v(" "), _c("li", {
-    staticClass: "page-item"
-  }, [_c("a", {
-    staticClass: "page-link",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("3")])]), _vm._v(" "), _c("li", {
-    staticClass: "page-item"
-  }, [_c("a", {
-    staticClass: "page-link",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Next")])])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -6453,7 +6461,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".row[data-v-4720a3c9] {\n  align-items: stretch;\n}\n.row .col[data-v-4720a3c9] {\n  min-height: 100%;\n}\n.row .col .card[data-v-4720a3c9] {\n  height: 100%;\n}", ""]);
+exports.push([module.i, ".container[data-v-4720a3c9] {\n  height: 100vh;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.container .row .col .card[data-v-4720a3c9] {\n  height: 100%;\n}", ""]);
 
 // exports
 

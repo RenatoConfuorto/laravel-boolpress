@@ -20,12 +20,18 @@
       </div>
     </div>
 
-    <ul class="pagination mt-5">
-      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    <ul class="pagination mb-5">
+      <li class="page-item" :class="{ disabled: currentPage === 1 }">
+        <a class="page-link" href="#" @click="getPosts(currentPage - 1)">Previous</a>
+      </li>
+
+      <li class="page-item" v-for="n in totalPages" :key="n" :class="{ active: currentPage === n }">
+        <a class="page-link" href="#" @click="getPosts(n)">{{ n }}</a>
+      </li>
+
+      <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+        <a class="page-link" href="#" @click="getPosts(currentPage + 1)">Next</a>
+      </li>
     </ul>
   </div>
 </template>
@@ -49,7 +55,7 @@ export default {
           },
         })
         .then((resp) => {
-          console.log(resp);
+          // console.log(resp);
           this.posts = resp.data.response.data;
           this.currentPage = currentPage;
           this.totalPages = resp.data.response.last_page;
@@ -70,15 +76,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.row {
-  align-items: stretch;
+.container{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-  .col {
-    min-height: 100%;
-
-    .card {
-      height: 100%;
+  .row {
+    // align-items: stretch;
+  
+    .col {
+  
+      .card {
+        height: 100%;
+      }
     }
   }
+
+
 }
 </style>
