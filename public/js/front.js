@@ -1984,7 +1984,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       posts: [],
       currentPage: 1,
-      totalPages: 1
+      totalPages: 1,
+      itemsPerPage: 6
     };
   },
   methods: {
@@ -1993,7 +1994,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("http://127.0.0.1:8000/api/posts", {
         params: {
-          page: currentPage
+          page: currentPage,
+          itemsPerPage: this.itemsPerPage
         }
       }).then(function (resp) {
         // console.log(resp);
@@ -2183,6 +2185,46 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
+    staticClass: "ms_container"
+  }, [_c("div", {
+    staticClass: "select-container"
+  }, [_c("h4", [_vm._v("Numero di elementi:")]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.itemsPerPage,
+      expression: "itemsPerPage"
+    }],
+    staticClass: "form-select",
+    attrs: {
+      "aria-label": "Default select example"
+    },
+    on: {
+      change: [function ($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.itemsPerPage = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }, function ($event) {
+        return _vm.getPosts(1);
+      }]
+    }
+  }, [_c("option", {
+    attrs: {
+      value: "3"
+    }
+  }, [_vm._v("3")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "6"
+    }
+  }, [_vm._v("6")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "9"
+    }
+  }, [_vm._v("9")])])]), _vm._v(" "), _c("div", {
     staticClass: "container"
   }, [_c("div", {
     staticClass: "row row-cols-3"
@@ -2198,7 +2240,7 @@ var render = function render() {
       staticClass: "card-title"
     }, [_vm._v(_vm._s(post.title))]), _vm._v(" "), _c("p", {
       staticClass: "card-text"
-    }, [_vm._v("\r\n              " + _vm._s(_vm.getCardText(post.content, 50)) + "\r\n            ")])])])]);
+    }, [_vm._v("\r\n                " + _vm._s(_vm.getCardText(post.content, 50)) + "\r\n              ")])])])]);
   }), 0), _vm._v(" "), _c("ul", {
     staticClass: "pagination mb-5"
   }, [_c("li", {
@@ -2249,7 +2291,7 @@ var render = function render() {
         return _vm.getPosts(_vm.currentPage + 1);
       }
     }
-  }, [_vm._v("Next")])])], 2)]);
+  }, [_vm._v("Next")])])], 2)])]);
 };
 
 var staticRenderFns = [];
@@ -6737,7 +6779,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".container[data-v-6df4ce32] {\n  height: calc(100vh - 4rem);\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.container .row .col .card[data-v-6df4ce32] {\n  height: 100%;\n}", ""]);
+exports.push([module.i, ".ms_container[data-v-6df4ce32] {\n  height: calc(100vh - 4rem);\n  display: flex;\n  flex-direction: column;\n}\n.ms_container .select-container[data-v-6df4ce32] {\n  margin-top: 1rem;\n  margin-left: 1rem;\n  display: flex;\n}\n.ms_container .container[data-v-6df4ce32] {\n  flex-grow: 1;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.ms_container .container .row .col .card[data-v-6df4ce32] {\n  height: 100%;\n}", ""]);
 
 // exports
 
