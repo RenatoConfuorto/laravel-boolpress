@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <PostList/>
-  </div>
+    <AppHeader/>
 </template>
 
 <script>
-import PostList from '../components/PostList.vue';
+import AppHeader from '../components/AppHeader.vue';
 
 export default {
   name: 'App',
   components: {
-    PostList,
+    AppHeader,
   },
 }
 </script>
