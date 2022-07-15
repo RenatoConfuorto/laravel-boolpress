@@ -4,7 +4,7 @@
     <nav>
       <ul>
         <li v-for="(link, index) in links" :key="index">
-          <router-link :to="link.route">{{ link.name }}</router-link>
+          <router-link :to="{ name: link.routeName }">{{ link.name }}</router-link>
         </li>
       </ul>
     </nav>
@@ -19,11 +19,15 @@ export default {
       links: [
         {
           name: "home",
-          route: "",
+          routeName: "home",
         },
         {
           name: "posts",
-          route: "",
+          routeName: "posts",
+        },
+        {
+          name: "contact",
+          routeName: "contact",
         },
       ],
     };

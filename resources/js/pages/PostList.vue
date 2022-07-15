@@ -76,8 +76,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../sass/_variables.scss';
+
 .container{
-  height: 100vh;
+  height: calc(100vh - $header-height);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

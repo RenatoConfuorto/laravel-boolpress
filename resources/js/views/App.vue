@@ -1,16 +1,19 @@
 <template>
-    <AppHeader/>
+  <div>
+    <AppHeader />
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import AppHeader from '../components/AppHeader.vue';
+import AppHeader from "../components/AppHeader.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     AppHeader,
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
