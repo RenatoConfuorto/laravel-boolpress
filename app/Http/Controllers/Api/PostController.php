@@ -21,8 +21,8 @@ class PostController extends Controller
     }
 
     public function show($slug){
-        $post = Post::where('slug', '=', $slug)->first();
-        // dd($post);
+        $post = Post::where('slug', '=', $slug)->with(['category'])->first();
+        // dd($post->category);
         
         if($post){
 

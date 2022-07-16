@@ -7,6 +7,7 @@
 
       <div class="post-body">
         <p>{{ post.content }}</p>
+        <p>Categoria: <span>{{ getCategory() }}</span></p>
       </div>
     </div>
     <div v-else>
@@ -24,6 +25,11 @@ export default {
       post: null,
       loading: true
     };
+  },
+  computed: {
+    getCategory(){
+      return this.post.category ? this.post.category.name : 'Nessuna';
+    }
   },
   created() {
     this.slug = this.$route.params.slug;

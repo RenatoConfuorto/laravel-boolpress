@@ -1974,6 +1974,11 @@ __webpack_require__.r(__webpack_exports__);
       loading: true
     };
   },
+  computed: {
+    getCategory: function getCategory() {
+      return this.post.category ? this.post.category.name : 'Nessuna';
+    }
+  },
   created: function created() {
     var _this = this;
 
@@ -2192,7 +2197,7 @@ var render = function render() {
     staticClass: "post-header"
   }, [_c("h1", [_vm._v(_vm._s(_vm.post.title))])]), _vm._v(" "), _c("div", {
     staticClass: "post-body"
-  }, [_c("p", [_vm._v(_vm._s(_vm.post.content))])])]) : _c("div", [_c("h1", [_vm._v("Aggiungere Loader")])])]);
+  }, [_c("p", [_vm._v(_vm._s(_vm.post.content))]), _vm._v(" "), _c("p", [_vm._v("Categoria: "), _c("span", [_vm._v(_vm._s(_vm.getCategory()))])])])]) : _c("div", [_c("h1", [_vm._v("Aggiungere Loader")])])]);
 };
 
 var staticRenderFns = [];
