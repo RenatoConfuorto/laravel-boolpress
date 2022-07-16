@@ -27,6 +27,7 @@
               <!-- <a href="#" class="card-link">Card link</a>
             <a href="#" class="card-link">Another link</a> -->
             </div>
+              <router-link class="card-link" to="#">Vedi il post</router-link>
           </div>
         </div>
       </div>
@@ -123,6 +124,14 @@ export default {
       .col {
         .card {
           height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          
+          .card-link{
+            display: inline-block;
+            padding: 1.25rem;
+          }
         }
       }
     }

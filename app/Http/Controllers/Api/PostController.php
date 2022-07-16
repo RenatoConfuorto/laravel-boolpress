@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Post;
+use Dotenv\Result\Success;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -16,6 +17,26 @@ class PostController extends Controller
         return response()->json([
             'success' => true,
             'response' => $posts,
+        ]);
+    }
+
+    public function show($slug){
+        $post = Post::where('slug', '=', $slug)->first();
+        // dd($post);
+        
+        if($post){
+
+            return response()->json([
+                'success' => true,
+                'response' => $post,
+                
+            ]);
+        }
+
+        return response()->json([
+
+            'success' => false,
+            'error' => 'Nessun post trovato',
         ]);
     }
 }
