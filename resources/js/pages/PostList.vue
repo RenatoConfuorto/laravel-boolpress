@@ -19,8 +19,9 @@
         >
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">{{ post.title }}</h5>
+              <h3 class="card-title">{{ post.title }}</h3>
               <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+              <p>Categoria: {{ post.category ? post.category.name : 'Nessuna' }}</p>
               <p class="card-text">
                 {{ getCardText(post.content, 50) }}
               </p>

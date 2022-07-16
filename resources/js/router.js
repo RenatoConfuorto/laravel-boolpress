@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 import AppHome from './pages/AppHome'
 import PostList from './pages/PostList'
+import TagsList from './pages/TagsList'
 import AppContact from './pages/AppContact'
 import AppPostPage from './pages/AppPostPage'
 
@@ -27,6 +28,11 @@ const router = new VueRouter({
       path: '/posts/:slug',
       name: 'single-post',
       component: AppPostPage,
+    },
+    {
+      path: '/tags',
+      name: 'tags',
+      component: TagsList,
     },
     {
       path: '/contact',

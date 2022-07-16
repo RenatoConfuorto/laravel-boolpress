@@ -13,7 +13,8 @@ class PostController extends Controller
         // dd($request->all());
         $items_per_page = $request->itemsPerPage ? $request->itemsPerPage : 6;
         // dd($items_per_page);
-        $posts = Post::paginate($items_per_page);
+        $posts = Post::with(['category'])->paginate($items_per_page);
+        // dd($posts[0]->category);
         return response()->json([
             'success' => true,
             'response' => $posts,
@@ -21,7 +22,7 @@ class PostController extends Controller
     }
 
     public function show($slug){
-        $post = Post::where('slug', '=', $slug)->with(['category'])->first();
+        $post = Post::where('slug', '=', $slug)->with(['category', 'tags'])->first();
         // dd($post->category);
         
         if($post){

@@ -7,7 +7,16 @@
 
       <div class="post-body">
         <p>{{ post.content }}</p>
-        <p>Categoria: <span>{{ getCategory() }}</span></p>
+        <p>Categoria: <span>{{ getCategory }}</span></p>
+      </div>
+
+      <div class="post-tags">
+        <ul>
+          <li v-for="tag in post.tags" :key="tag.id">
+
+            <router-link to="#">#{{ tag.name }}</router-link>
+          </li>
+        </ul>
       </div>
     </div>
     <div v-else>
@@ -56,6 +65,14 @@ export default {
   &-body{
     margin-top: 2rem;
     line-height: 1.8;
+  }
+
+  &-tags{
+
+    ul{
+      list-style: none;
+
+    }
   }
 }
 </style>

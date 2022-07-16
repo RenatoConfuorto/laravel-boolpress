@@ -26,6 +26,10 @@ export default {
           routeName: "posts",
         },
         {
+          name: "tags",
+          routeName: "tags",
+        },
+        {
           name: "contact",
           routeName: "contact",
         },
