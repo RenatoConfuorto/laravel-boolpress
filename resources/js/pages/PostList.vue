@@ -27,7 +27,7 @@
               <!-- <a href="#" class="card-link">Card link</a>
             <a href="#" class="card-link">Another link</a> -->
             </div>
-              <router-link class="card-link" to="#">Vedi il post</router-link>
+              <router-link class="card-link" :to="{ name: 'single-post', params: { slug: post.slug } }">Vedi il post</router-link>
           </div>
         </div>
       </div>
