@@ -2018,7 +2018,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       slug: "",
       post: null,
-      loading: true
+      success: false
     };
   },
   components: {
@@ -2026,7 +2026,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     getCategory: function getCategory() {
-      return this.post.category ? this.post.category.name : 'Nessuna';
+      return this.post.category ? this.post.category.name : "Nessuna";
     }
   },
   created: function created() {
@@ -2034,9 +2034,11 @@ __webpack_require__.r(__webpack_exports__);
 
     this.slug = this.$route.params.slug;
     axios.get("/api/posts/".concat(this.slug)).then(function (resp) {
+      var _resp$data$response;
+
       // console.log(resp.data.response);
-      _this.post = resp.data.response;
-      console.log(_this.post);
+      _this.post = (_resp$data$response = resp.data.response) !== null && _resp$data$response !== void 0 ? _resp$data$response : [];
+      _this.success = resp.data.response ? true : false; // console.log(this.post);
     });
   }
 });
@@ -2061,7 +2063,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       slug: this.$route.params.slug,
-      tag: null
+      tag: null,
+      success: false
     };
   },
   components: {
@@ -2074,9 +2077,12 @@ __webpack_require__.r(__webpack_exports__);
 
     // console.log(this.$route);
     axios.get("/api/tags/".concat(this.slug)).then(function (resp) {
+      var _resp$data$response;
+
       // console.log(resp.data);
-      _this.tag = resp.data.response;
-      console.log(_this.tag);
+      // this.tag = resp.data.response;
+      _this.tag = (_resp$data$response = resp.data.response) !== null && _resp$data$response !== void 0 ? _resp$data$response : [];
+      _this.success = resp.data.response ? true : false; // console.log(this.tag);
     });
   }
 });
@@ -2402,21 +2408,37 @@ var render = function render() {
     staticClass: "container"
   }, [_vm.post ? _c("div", {
     staticClass: "post"
-  }, [_c("div", {
+  }, [_vm.success ? _c("div", [_c("div", {
     staticClass: "post-header"
   }, [_c("h1", [_vm._v(_vm._s(_vm.post.title))])]), _vm._v(" "), _c("div", {
     staticClass: "post-body"
-  }, [_c("p", [_vm._v(_vm._s(_vm.post.content))]), _vm._v(" "), _c("p", [_vm._v("Categoria: "), _c("span", [_vm._v(_vm._s(_vm.getCategory))])])]), _vm._v(" "), _c("div", {
+  }, [_c("p", [_vm._v("\r\n            Categoria: "), _c("span", [_vm._v(_vm._s(_vm.getCategory))])]), _vm._v(" "), _c("p", {
+    staticClass: "text"
+  }, [_vm._v(_vm._s(_vm.post.content))])]), _vm._v(" "), _c("div", {
     staticClass: "post-tags"
   }, [_c("ul", _vm._l(_vm.post.tags, function (tag) {
     return _c("li", {
       key: tag.id
     }, [_c("router-link", {
       attrs: {
-        to: "#"
+        to: {
+          name: "single-tag",
+          params: {
+            slug: tag.slug
+          }
+        }
       }
     }, [_vm._v("#" + _vm._s(tag.name))])], 1);
-  }), 0)])]) : _c("div", [_c("AppLoader")], 1)]);
+  }), 0)])]) : _c("div", {
+    staticClass: "error"
+  }, [_c("h2", [_vm._v("Il post richiesto non è stato trovato")]), _vm._v(" "), _c("router-link", {
+    staticClass: "card-link",
+    attrs: {
+      to: {
+        name: "posts"
+      }
+    }
+  }, [_vm._v("Torna indietro o riprova")])], 1)]) : _c("div", [_c("AppLoader")], 1)]);
 };
 
 var staticRenderFns = [];
@@ -2444,7 +2466,7 @@ var render = function render() {
     staticClass: "container"
   }, [_vm.tag ? _c("div", {
     staticClass: "tag"
-  }, [_c("div", {
+  }, [_vm.success ? _c("div", [_c("div", {
     staticClass: "tag-header"
   }, [_c("h1", [_vm._v(_vm._s(_vm.tag.name))])]), _vm._v(" "), _c("div", {
     staticClass: "tag-posts"
@@ -2459,7 +2481,16 @@ var render = function render() {
         post: post
       }
     })], 1);
-  }), 0)])]) : _c("AppLoader")], 1);
+  }), 0)])]) : _c("div", {
+    staticClass: "error"
+  }, [_c("h2", [_vm._v("Il tag richiesto non è stato trovato")]), _vm._v(" "), _c("router-link", {
+    staticClass: "card-link",
+    attrs: {
+      to: {
+        name: "tags"
+      }
+    }
+  }, [_vm._v("Torna indietro o riprova")])], 1)]) : _c("AppLoader")], 1);
 };
 
 var staticRenderFns = [];
@@ -7176,7 +7207,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".post[data-v-2de40d97] {\n  margin-top: 2rem;\n}\n.post-header[data-v-2de40d97] {\n  padding-bottom: 1rem;\n  border-bottom: 2px solid #6cb2eb;\n}\n.post-body[data-v-2de40d97] {\n  margin-top: 2rem;\n  line-height: 1.8;\n}\n.post-tags ul[data-v-2de40d97] {\n  list-style: none;\n}", ""]);
+exports.push([module.i, ".post[data-v-2de40d97] {\n  margin-top: 2rem;\n}\n.post-header[data-v-2de40d97] {\n  padding-bottom: 1rem;\n  border-bottom: 2px solid #6cb2eb;\n}\n.post-body[data-v-2de40d97] {\n  margin-top: 2rem;\n  line-height: 1.8;\n}\n.post-body .text[data-v-2de40d97] {\n  font-size: 1.4rem;\n}\n.post-tags ul[data-v-2de40d97] {\n  list-style: none;\n}\n.post .error[data-v-2de40d97] {\n  width: 100%;\n  height: calc(100vh - 4rem);\n  color: #6cb2eb;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.post .error h2[data-v-2de40d97] {\n  margin-bottom: 1.5rem;\n}", ""]);
 
 // exports
 
@@ -7195,7 +7226,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".tag[data-v-84a3039e] {\n  margin-top: 2rem;\n}\n.tag-header[data-v-84a3039e] {\n  padding-bottom: 1rem;\n  border-bottom: 2px solid #6cb2eb;\n}\n.tag-header h1[data-v-84a3039e]::first-letter {\n  text-transform: capitalize;\n}\n.tag-posts[data-v-84a3039e] {\n  margin-top: 2rem;\n}", ""]);
+exports.push([module.i, ".tag[data-v-84a3039e] {\n  margin-top: 2rem;\n}\n.tag-header[data-v-84a3039e] {\n  padding-bottom: 1rem;\n  border-bottom: 2px solid #6cb2eb;\n}\n.tag-header h1[data-v-84a3039e]::first-letter {\n  text-transform: capitalize;\n}\n.tag-posts[data-v-84a3039e] {\n  margin-top: 2rem;\n}\n.tag .error[data-v-84a3039e] {\n  width: 100%;\n  height: calc(100vh - 4rem);\n  color: #6cb2eb;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.tag .error h2[data-v-84a3039e] {\n  margin-bottom: 1.5rem;\n}", ""]);
 
 // exports
 
@@ -7233,7 +7264,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".ms_container[data-v-6df4ce32] {\n  height: calc(100vh - 4rem);\n  display: flex;\n  flex-direction: column;\n}\n.ms_container .select-container[data-v-6df4ce32] {\n  margin-top: 1rem;\n  margin-left: 1rem;\n  display: flex;\n}\n.ms_container .container[data-v-6df4ce32] {\n  flex-grow: 1;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}", ""]);
+exports.push([module.i, ".ms_container[data-v-6df4ce32] {\n  height: calc(100vh - 4rem);\n  display: flex;\n  flex-direction: column;\n}\n.ms_container .select-container[data-v-6df4ce32] {\n  margin-top: 1rem;\n  margin-left: 3rem;\n  display: flex;\n}\n.ms_container .select-container select[data-v-6df4ce32] {\n  margin-left: 1rem;\n}\n.ms_container .container[data-v-6df4ce32] {\n  flex-grow: 1;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}", ""]);
 
 // exports
 

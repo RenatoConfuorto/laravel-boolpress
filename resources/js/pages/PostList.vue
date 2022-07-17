@@ -95,8 +95,12 @@ export default {
 
   .select-container{
     margin-top: 1rem;
-    margin-left: 1rem;
+    margin-left: 3rem;
     display: flex;
+
+    select{
+      margin-left: 1rem;
+    }
   }
 
   .container {
