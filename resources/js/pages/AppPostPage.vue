@@ -20,12 +20,14 @@
       </div>
     </div>
     <div v-else>
-      <h1>Aggiungere Loader</h1>
+      <AppLoader/>
     </div>
   </div>
 </template>
 
 <script>
+import AppLoader from '../components/AppLoader.vue';
+
 export default {
   name: "AppPostPage",
   data() {
@@ -34,6 +36,9 @@ export default {
       post: null,
       loading: true
     };
+  },
+  components: {
+    AppLoader,
   },
   computed: {
     getCategory(){

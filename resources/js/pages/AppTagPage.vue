@@ -12,13 +12,12 @@
         </div>
       </div>
     </div>
-    <div v-else>
-      <h1>Aggiungere Loader</h1>
-    </div>
+      <AppLoader v-else/>
   </div>
 </template>
 
 <script>
+import AppLoader from '../components/AppLoader.vue';
 import PostCard from '../components/PostCard.vue';
 
 export default {
@@ -30,6 +29,7 @@ data(){
   }
 },
 components: {
+  AppLoader,
   PostCard,
 },
 methods: {
