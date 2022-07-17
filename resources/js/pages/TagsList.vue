@@ -1,5 +1,6 @@
 <template>
 <div class="container">
+  <h1>Tutti i Tag</h1>
   <div class="row row-cols-3">
     <div
       v-for="tag in tags"
@@ -13,7 +14,7 @@
           <!-- {{ getCardText(post.content, 50) }} -->
           </p>
         </div>
-        <!-- <router-link class="card-link" :to="{ name: 'single-post', params: { slug: post.slug } }">Vedi il post</router-link> -->
+        <router-link class="card-link" :to="{ name: 'single-tag', params: { slug: tag.slug } }">Vedi i post collegati</router-link>
       </div>
     </div>
   </div>
@@ -49,6 +50,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-top: 2rem;
 
   .row {
     .col {
@@ -61,7 +63,7 @@ export default {
         &-body{
           text-transform: capitalize;
         }
-        
+
         &-link {
           display: inline-block;
           padding: 1.25rem;

@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 import AppHome from './pages/AppHome'
 import PostList from './pages/PostList'
 import TagsList from './pages/TagsList'
+import AppTagPage from './pages/AppTagPage'
 import AppContact from './pages/AppContact'
 import AppPostPage from './pages/AppPostPage'
 
@@ -33,6 +34,11 @@ const router = new VueRouter({
       path: '/tags',
       name: 'tags',
       component: TagsList,
+    },
+    {
+      path: '/tags/:slug',
+      name: 'single-tag',
+      component: AppTagPage
     },
     {
       path: '/contact',

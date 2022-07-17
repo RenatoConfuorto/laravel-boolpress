@@ -16,4 +16,21 @@ class TagsController extends Controller
             'response' => $tags,
         ]);
     }
+
+    public function show($slug){
+        $tag = Tag::where('slug', '=', $slug)->with('posts')->first();
+        // dd($tag);
+
+        if($tag){
+            return response()->json([
+                'success' => true,
+                'response' => $tag,
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'error' => 'Nessun tag trovato',
+        ]);
+    }
 }
