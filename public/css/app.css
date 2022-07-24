@@ -10982,6 +10982,11 @@ a.text-dark:focus {
   font-size: 1.82rem;
 }
 
+.post-show img {
+  max-width: 750px;
+  max-height: 500px;
+}
+
 .form-container {
   width: 60%;
 }

@@ -2414,7 +2414,12 @@ var render = function render() {
     staticClass: "post-body"
   }, [_c("p", [_vm._v("\r\n            Categoria: "), _c("span", [_vm._v(_vm._s(_vm.getCategory))])]), _vm._v(" "), _c("p", {
     staticClass: "text"
-  }, [_vm._v(_vm._s(_vm.post.content))])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.post.content))]), _vm._v(" "), _vm.post.image_path ? _c("div", [_c("img", {
+    attrs: {
+      src: _vm.post.image_path,
+      alt: " "
+    }
+  })]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "post-tags"
   }, [_c("ul", _vm._l(_vm.post.tags, function (tag) {
     return _c("li", {
@@ -55451,7 +55456,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Boolean\laravel-boolpress\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\boolean\laravel-boolpress\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

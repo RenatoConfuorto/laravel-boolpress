@@ -11,6 +11,9 @@
             Categoria: <span>{{ getCategory }}</span>
           </p>
           <p class="text">{{ post.content }}</p>
+          <div v-if="post.image_path">
+            <img :src="post.image_path" alt=" ">
+          </div>
         </div>
 
         <div class="post-tags">

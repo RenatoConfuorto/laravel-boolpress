@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.posts.update', ['post' => $post->id]) }}" method="POST">
+        <form action="{{ route('admin.posts.update', ['post' => $post->id]) }}" method="POST" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="mb-3">
@@ -44,6 +44,11 @@
             <div class="mb-3">
                 <label for="content" class="form-label">Testo</label>
                 <textarea class="form-control" id="content" name="content"> {{ old('content', $post->content) }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image" >Immagine</label>
+                <input type="file" id="image" name="image">
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

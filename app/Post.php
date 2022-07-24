@@ -13,6 +13,7 @@ class Post extends Model
         'content',
         'slug',
         'category_id',
+        'image_path',
     ];
 
     public static function generatePostSlug($title){

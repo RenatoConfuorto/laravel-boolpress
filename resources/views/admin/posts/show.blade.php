@@ -5,6 +5,9 @@
   <h1>{{ $post->title }}</h1>
   <h4>{{ $post->slug }}</h4>
   <p>{{ $post->content }}</p>
+  @if ($post->image_path)
+      <img src="{{ asset('storage/' . $post->image_path) }}" alt="{{ $post->title }}">
+  @endif
 
   <p>Categoria: {{ $post->category ? $post->category->name : 'Nessuna' }}</p>
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -46,6 +47,12 @@ class PostsController extends Controller
         $request->validate($this->getPostValidationRules());
         $post = new Post();
         $data = $request->all();
+
+        if(isset($data['image'])){
+            $image_path = Storage::put('img', $data['image']);
+            $data['image_path'] = $image_path;
+            dd($data);
+        }
 
         // $post->title = $data['title'];
         // $post->content = $data['content'];
@@ -100,8 +107,17 @@ class PostsController extends Controller
     {
         $request->validate($this->getPostValidationRules());
         $data = $request->all();
-
         $post = Post::findOrFail($id);
+
+        if(isset($data['image'])){
+            if($post->image_path){
+                Storage::delete($post->image_path);
+            }
+
+            $image_path = Storage::put('img', $data['image']);
+            $data['image_path'] = $image_path;
+        }
+
         // $post->title = $data['title'];
         // $post->content = $data['content'];
         $data['slug'] = Post::generatePostSlug($data['title']);
@@ -127,6 +143,9 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $post->tags()->sync([]);
 
+        if($post->image_path){
+            Storage::delete($post->image_path);
+        }
         $post->delete();
 
         return redirect()->route('admin.posts.index');
@@ -137,7 +156,8 @@ class PostsController extends Controller
             'title' => 'required|max:255',
             'content' => 'required|max:30000',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
+            'image' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp|max:10240',
         ];
     }
 
