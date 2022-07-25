@@ -22,3 +22,4 @@ Route::get('/posts', 'Api\PostController@index')->name('api.posts');
 Route::get('/posts/{slug}', 'Api\PostController@show')->name('api.show');
 Route::get('/tags', 'Api\TagsController@index')->name('api.tags');
 Route::get('/tags/{slug}', 'Api\TagsController@show')->name('api.tag.show');
+Route::post('/leads', 'Api\LeadController@store')->name('api.leads.store');
