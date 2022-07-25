@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Mail\NewPostNotification;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
@@ -65,6 +67,9 @@ class PostsController extends Controller
         if(isset($data['tags'])){
             $post->tags()->sync($data['tags']);
         }
+
+
+        Mail::to('user@gmail.com')->send(new NewPostNotification($post));
         return redirect()->route('admin.posts.index');
     }
 
